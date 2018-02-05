@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelAPP.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelAPPStoreContainer">
+    <EntitySet Name="FilmSet" EntityType="ModelAPP.Store.FilmSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GenreSet" EntityType="ModelAPP.Store.GenreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentaireSet" EntityType="ModelAPP.Store.CommentaireSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NotesSet" EntityType="ModelAPP.Store.NotesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UtilisateurSet" EntityType="ModelAPP.Store.UtilisateurSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FilmGenre" Association="ModelAPP.Store.FilmGenre">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Genre" EntitySet="GenreSet" />
+    </AssociationSet>
+    <AssociationSet Name="FilmCommentaire" Association="ModelAPP.Store.FilmCommentaire">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Commentaire" EntitySet="CommentaireSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurFilm" Association="ModelAPP.Store.UtilisateurFilm">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Film" EntitySet="FilmSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurCommentaire" Association="ModelAPP.Store.UtilisateurCommentaire">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Commentaire" EntitySet="CommentaireSet" />
+    </AssociationSet>
+    <AssociationSet Name="NotesFilm" Association="ModelAPP.Store.NotesFilm">
+      <End Role="Notes" EntitySet="NotesSet" />
+      <End Role="Film" EntitySet="FilmSet" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurNotes" Association="ModelAPP.Store.UtilisateurNotes">
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+      <End Role="Notes" EntitySet="NotesSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FilmSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resume" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genre_Id" Type="int" Nullable="false" />
+    <Property Name="Utilisateur_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GenreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommentaireSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Film_Id" Type="int" Nullable="false" />
+    <Property Name="Utilisateur_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Film_Id" Type="int" Nullable="false" />
+    <Property Name="Utilisateur_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UtilisateurSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FilmGenre">
+    <End Role="Film" Type="ModelAPP.Store.FilmSet" Multiplicity="*" />
+    <End Role="Genre" Type="ModelAPP.Store.GenreSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Film">
+        <PropertyRef Name="Genre_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FilmCommentaire">
+    <End Role="Film" Type="ModelAPP.Store.FilmSet" Multiplicity="1" />
+    <End Role="Commentaire" Type="ModelAPP.Store.CommentaireSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Commentaire">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurFilm">
+    <End Role="Utilisateur" Type="ModelAPP.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Film" Type="ModelAPP.Store.FilmSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Film">
+        <PropertyRef Name="Utilisateur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurCommentaire">
+    <End Role="Utilisateur" Type="ModelAPP.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Commentaire" Type="ModelAPP.Store.CommentaireSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Commentaire">
+        <PropertyRef Name="Utilisateur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NotesFilm">
+    <End Role="Notes" Type="ModelAPP.Store.NotesSet" Multiplicity="*" />
+    <End Role="Film" Type="ModelAPP.Store.FilmSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurNotes">
+    <End Role="Utilisateur" Type="ModelAPP.Store.UtilisateurSet" Multiplicity="1" />
+    <End Role="Notes" Type="ModelAPP.Store.NotesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="Utilisateur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ModelAPP" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelAPPContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FilmSet" EntityType="ModelAPP.Film" />
+          <EntitySet Name="GenreSet" EntityType="ModelAPP.Genre" />
+          <EntitySet Name="CommentaireSet" EntityType="ModelAPP.Commentaire" />
+          <AssociationSet Name="FilmGenre" Association="ModelAPP.FilmGenre">
+            <End Role="Film" EntitySet="FilmSet" />
+            <End Role="Genre" EntitySet="GenreSet" />
+          </AssociationSet>
+          <AssociationSet Name="FilmCommentaire" Association="ModelAPP.FilmCommentaire">
+            <End Role="Film" EntitySet="FilmSet" />
+            <End Role="Commentaire" EntitySet="CommentaireSet" />
+          </AssociationSet>
+          <EntitySet Name="NotesSet" EntityType="ModelAPP.Notes" />
+          <EntitySet Name="UtilisateurSet" EntityType="ModelAPP.Utilisateur" />
+          <AssociationSet Name="UtilisateurFilm" Association="ModelAPP.UtilisateurFilm">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Film" EntitySet="FilmSet" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurCommentaire" Association="ModelAPP.UtilisateurCommentaire">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Commentaire" EntitySet="CommentaireSet" />
+          </AssociationSet>
+          <AssociationSet Name="NotesFilm" Association="ModelAPP.NotesFilm">
+            <End Role="Notes" EntitySet="NotesSet" />
+            <End Role="Film" EntitySet="FilmSet" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurNotes" Association="ModelAPP.UtilisateurNotes">
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+            <End Role="Notes" EntitySet="NotesSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" Nullable="false" />
+          <Property Name="Resume" Type="String" Nullable="false" />
+          <NavigationProperty Name="Genre" Relationship="ModelAPP.FilmGenre" FromRole="Film" ToRole="Genre" />
+          <NavigationProperty Name="Commentaire" Relationship="ModelAPP.FilmCommentaire" FromRole="Film" ToRole="Commentaire" />
+          <NavigationProperty Name="Utilisateur" Relationship="ModelAPP.UtilisateurFilm" FromRole="Film" ToRole="Utilisateur" />
+          <NavigationProperty Name="Notes" Relationship="ModelAPP.NotesFilm" FromRole="Film" ToRole="Notes" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="ModelAPP.FilmGenre" FromRole="Genre" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Commentaire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Film" Relationship="ModelAPP.FilmCommentaire" FromRole="Commentaire" ToRole="Film" />
+          <NavigationProperty Name="Utilisateur" Relationship="ModelAPP.UtilisateurCommentaire" FromRole="Commentaire" ToRole="Utilisateur" />
+        </EntityType>
+        <Association Name="FilmGenre">
+          <End Type="ModelAPP.Film" Role="Film" Multiplicity="1" />
+          <End Type="ModelAPP.Genre" Role="Genre" Multiplicity="1" />
+        </Association>
+        <Association Name="FilmCommentaire">
+          <End Type="ModelAPP.Film" Role="Film" Multiplicity="1" />
+          <End Type="ModelAPP.Commentaire" Role="Commentaire" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Film" Relationship="ModelAPP.NotesFilm" FromRole="Notes" ToRole="Film" />
+          <NavigationProperty Name="Utilisateur" Relationship="ModelAPP.UtilisateurNotes" FromRole="Notes" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="ModelAPP.UtilisateurFilm" FromRole="Utilisateur" ToRole="Film" />
+          <NavigationProperty Name="Commentaire" Relationship="ModelAPP.UtilisateurCommentaire" FromRole="Utilisateur" ToRole="Commentaire" />
+          <NavigationProperty Name="Notes" Relationship="ModelAPP.UtilisateurNotes" FromRole="Utilisateur" ToRole="Notes" />
+        </EntityType>
+        <Association Name="UtilisateurFilm">
+          <End Type="ModelAPP.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="ModelAPP.Film" Role="Film" Multiplicity="*" />
+        </Association>
+        <Association Name="UtilisateurCommentaire">
+          <End Type="ModelAPP.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="ModelAPP.Commentaire" Role="Commentaire" Multiplicity="*" />
+        </Association>
+        <Association Name="NotesFilm">
+          <End Type="ModelAPP.Notes" Role="Notes" Multiplicity="1" />
+          <End Type="ModelAPP.Film" Role="Film" Multiplicity="1" />
+        </Association>
+        <Association Name="UtilisateurNotes">
+          <End Type="ModelAPP.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="ModelAPP.Notes" Role="Notes" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelAPPStoreContainer" CdmEntityContainer="ModelAPPContainer">
+    <EntitySetMapping Name="FilmSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelAPP.Film)">
+        <MappingFragment StoreEntitySet="FilmSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Resume" ColumnName="Resume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelAPP.Genre)">
+        <MappingFragment StoreEntitySet="GenreSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentaireSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelAPP.Commentaire)">
+        <MappingFragment StoreEntitySet="CommentaireSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelAPP.Notes)">
+        <MappingFragment StoreEntitySet="NotesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UtilisateurSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ModelAPP.Utilisateur)">
+        <MappingFragment StoreEntitySet="UtilisateurSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FilmGenre" TypeName="ModelAPP.FilmGenre" StoreEntitySet="FilmSet">
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="Id" ColumnName="Genre_Id" />
+      </EndProperty>
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FilmCommentaire" TypeName="ModelAPP.FilmCommentaire" StoreEntitySet="CommentaireSet">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Film_Id" />
+      </EndProperty>
+      <EndProperty Name="Commentaire">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UtilisateurFilm" TypeName="ModelAPP.UtilisateurFilm" StoreEntitySet="FilmSet">
+      <EndProperty Name="Utilisateur">
+        <ScalarProperty Name="Id" ColumnName="Utilisateur_Id" />
+      </EndProperty>
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UtilisateurCommentaire" TypeName="ModelAPP.UtilisateurCommentaire" StoreEntitySet="CommentaireSet">
+      <EndProperty Name="Utilisateur">
+        <ScalarProperty Name="Id" ColumnName="Utilisateur_Id" />
+      </EndProperty>
+      <EndProperty Name="Commentaire">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NotesFilm" TypeName="ModelAPP.NotesFilm" StoreEntitySet="NotesSet">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Film_Id" />
+      </EndProperty>
+      <EndProperty Name="Notes">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UtilisateurNotes" TypeName="ModelAPP.UtilisateurNotes" StoreEntitySet="NotesSet">
+      <EndProperty Name="Utilisateur">
+        <ScalarProperty Name="Id" ColumnName="Utilisateur_Id" />
+      </EndProperty>
+      <EndProperty Name="Notes">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
