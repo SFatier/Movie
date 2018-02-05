@@ -6,10 +6,11 @@ using System.Data.Entity;
 
 namespace DataBase.ReferentielManager
 {
-    public class DBConnect : DbContext
+    public class DBConnect
     {
-        //Récupération de database
-        public ModelAPPContainer ct = new ModelAPPContainer();
+        public static ModelAPPContainer ct = null;
+        private static DBConnect s_Instance;
+        private static readonly object s_InstanceLocker = new object();
 
         #region [Déclaration]
         private readonly ICommentaire _Commentaire;
@@ -32,9 +33,6 @@ namespace DataBase.ReferentielManager
 
         #region [ Singleton ]
 
-        private static DBConnect s_Instance;
-        private static readonly object s_InstanceLocker = new object();
-
         public static DBConnect Instance
         {
             get
@@ -42,6 +40,7 @@ namespace DataBase.ReferentielManager
                 lock (s_InstanceLocker)
                 {
                     if (s_Instance == null)
+                        ct = new ModelAPPContainer();
                         s_Instance = new DBConnect();
                 }
                 return s_Instance;
