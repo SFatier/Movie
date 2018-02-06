@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/01/2018 14:33:59
--- Generated from EDMX file: C:\Users\sigt_sf\source\repos\movie.net\MovieNet\DataBase\ModelAPP.edmx
+-- Date Created: 02/06/2018 10:24:13
+-- Generated from EDMX file: C:\Users\sigt_sf\source\repos\MovieWCF\DataBase\ModelAPP.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -40,7 +40,7 @@ GO
 -- Creating table 'GenreSet'
 CREATE TABLE [dbo].[GenreSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Nom] nvarchar(max)  NOT NULL
+    [Nom] varchar(max)  NOT NULL
 );
 GO
 
@@ -63,7 +63,7 @@ GO
 -- Creating table 'UtilisateurSet'
 CREATE TABLE [dbo].[UtilisateurSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Email] nvarchar(max)  NOT NULL
+    [Email] varchar(max)  NOT NULL
 );
 GO
 
