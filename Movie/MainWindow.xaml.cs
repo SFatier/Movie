@@ -28,9 +28,7 @@ namespace Movie
         private void FilmViewControl_Loaded(object sender, RoutedEventArgs e)
         {
             Movie.ViewModel.FilmViewModel filmVMObject = new ViewModel.FilmViewModel();
-            filmVMObject.LoadFilms();
 
-            FilmViewControl.DataContext = filmVMObject;
         }
     }
 }

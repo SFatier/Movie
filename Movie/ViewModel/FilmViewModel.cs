@@ -10,6 +10,10 @@ namespace Movie.ViewModel
 {
     public class FilmViewModel
     {
+        public FilmViewModel()
+        {
+            LoadFilms();
+        }
 
         //Nom du Bindings
         public ObservableCollection<Film> Films
@@ -20,11 +24,12 @@ namespace Movie.ViewModel
 
         public void LoadFilms()
         {
-            ObservableCollection<Film> films = new ObservableCollection<Film>();
-            
-            films.Add(new Film { Titre = "Allen", Resume = "Brown", GenreFK = 1, UtilisateurFK = 1 });
-            films.Add(new Film { Titre = "Linda", Resume = "Hamerski" , GenreFK = 1, UtilisateurFK = 1 });
-
+            ObservableCollection<Model.Film> films = new ObservableCollection<Model.Film>();
+            var lstFilm = DataBase.ReferentielManager.DBConnect.Instance.GetAllFilm();
+            foreach (var item in lstFilm)
+            {
+                films.Add(new Model.Film { Titre = item.Titre, Resume = item.Resume });
+            }
             Films = films;
         }
     }
