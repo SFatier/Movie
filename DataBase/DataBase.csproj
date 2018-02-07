@@ -68,12 +68,15 @@
   <ItemGroup>
     <Compile Include="Commentaire.cs">
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Film.cs">
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Genre.cs">
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Impl\UtilisateurRepo.cs" />
     <Compile Include="Impl\NoteRepo.cs" />
@@ -86,19 +89,23 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelAPP.Context.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ModelAPP.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ModelAPP.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelAPP.edmx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Notes.cs">
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +113,7 @@
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Utilisateur.cs">
       <DependentUpon>ModelAPP.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +121,11 @@
     <EntityDeploy Include="ModelAPP.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelAPP.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EntityDeploy>
     <None Include="ModelAPP.edmx.diagram">
       <DependentUpon>ModelAPP.edmx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -131,12 +141,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelAPP.Context.cs</LastGenOutput>
       <DependentUpon>ModelAPP.edmx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ModelAPP.edmx.sql" />
+    <Content Include="ModelAPP.edmx.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ModelAPP.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelAPP.cs</LastGenOutput>
       <DependentUpon>ModelAPP.edmx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

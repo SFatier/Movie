@@ -5,14 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Movie.Views"
              xmlns:viewModel="clr-namespace:Movie.ViewModel"
+              xmlns:vml = "clr-namespace:Movie.VML" 
+             vml:ViewModelLocator.AutoHookedUpViewModel = "True" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <UserControl.DataContext>
-        <viewModel:FilmViewModel/>
-    </UserControl.DataContext>
-    
+        <!--<UserControl.DataContext>
+            <viewModel:FilmViewModel/>
+        </UserControl.DataContext>-->
+
+    <UserControl.Resources>
+        <DataTemplate x:Key = "filmsTemplate">
+            <StackPanel Orientation = "Horizontal">
+                <Image Source="{Binding Path= Path, Mode = TwoWay }" Width = "100" Margin = "3 5 3 5" />
+                <TextBox Text = "{Binding Path = Titre, Mode = TwoWay}"   Width = "100" Margin = "3 5 3 5"/>
+                <TextBox Text = "{Binding Path = Resume, Mode = TwoWay}"   Width = "100" Margin = "0 5 3 5"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
+        <ListBox 
+         ItemsSource = "{Binding Films}" 
+         ItemTemplate = "{StaticResource filmsTemplate}"/>
+    </Grid>
+
+    <!--<Grid>
         <StackPanel HorizontalAlignment = "Left">
             <ItemsControl ItemsSource = "{Binding Path = Films}">
                 <ItemsControl.ItemTemplate>
@@ -26,5 +43,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </UserControl>

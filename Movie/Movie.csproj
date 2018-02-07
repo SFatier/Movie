@@ -65,6 +65,7 @@
     <Compile Include="Views\FilmView.xaml.cs">
       <DependentUpon>FilmView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VML\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
