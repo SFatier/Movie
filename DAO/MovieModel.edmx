@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MovieModelStoreContainer">
+    <EntitySet Name="UserSet" EntityType="MovieModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NotesSet" EntityType="MovieModel.Store.NotesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilmSet" EntityType="MovieModel.Store.FilmSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GenreSet" EntityType="MovieModel.Store.GenreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RemarkSet" EntityType="MovieModel.Store.RemarkSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserNotes" Association="MovieModel.Store.UserNotes">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Notes" EntitySet="NotesSet" />
+    </AssociationSet>
+    <AssociationSet Name="FilmGenre" Association="MovieModel.Store.FilmGenre">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Genre" EntitySet="GenreSet" />
+    </AssociationSet>
+    <AssociationSet Name="RemarkFilm" Association="MovieModel.Store.RemarkFilm">
+      <End Role="Remark" EntitySet="RemarkSet" />
+      <End Role="Film" EntitySet="FilmSet" />
+    </AssociationSet>
+    <AssociationSet Name="FilmNotes" Association="MovieModel.Store.FilmNotes">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Notes" EntitySet="NotesSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserFilm" Association="MovieModel.Store.UserFilm">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Film" EntitySet="FilmSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserRemark" Association="MovieModel.Store.UserRemark">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Remark" EntitySet="RemarkSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Film_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resume" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IMG" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genre_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GenreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RemarkSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Film_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserNotes">
+    <End Role="User" Type="MovieModel.Store.UserSet" Multiplicity="1" />
+    <End Role="Notes" Type="MovieModel.Store.NotesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FilmGenre">
+    <End Role="Film" Type="MovieModel.Store.FilmSet" Multiplicity="*" />
+    <End Role="Genre" Type="MovieModel.Store.GenreSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Film">
+        <PropertyRef Name="Genre_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RemarkFilm">
+    <End Role="Remark" Type="MovieModel.Store.RemarkSet" Multiplicity="*" />
+    <End Role="Film" Type="MovieModel.Store.FilmSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Remark">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FilmNotes">
+    <End Role="Film" Type="MovieModel.Store.FilmSet" Multiplicity="1" />
+    <End Role="Notes" Type="MovieModel.Store.NotesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserFilm">
+    <End Role="User" Type="MovieModel.Store.UserSet" Multiplicity="1" />
+    <End Role="Film" Type="MovieModel.Store.FilmSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Film">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRemark">
+    <End Role="User" Type="MovieModel.Store.UserSet" Multiplicity="1" />
+    <End Role="Remark" Type="MovieModel.Store.RemarkSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Remark">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MovieModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MovieModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="MovieModel.User" />
+          <EntitySet Name="NotesSet" EntityType="MovieModel.Notes" />
+          <EntitySet Name="FilmSet" EntityType="MovieModel.Film" />
+          <EntitySet Name="GenreSet" EntityType="MovieModel.Genre" />
+          <EntitySet Name="RemarkSet" EntityType="MovieModel.Remark" />
+          <AssociationSet Name="UserNotes" Association="MovieModel.UserNotes">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Notes" EntitySet="NotesSet" />
+          </AssociationSet>
+          <AssociationSet Name="FilmGenre" Association="MovieModel.FilmGenre">
+            <End Role="Film" EntitySet="FilmSet" />
+            <End Role="Genre" EntitySet="GenreSet" />
+          </AssociationSet>
+          <AssociationSet Name="RemarkFilm" Association="MovieModel.RemarkFilm">
+            <End Role="Remark" EntitySet="RemarkSet" />
+            <End Role="Film" EntitySet="FilmSet" />
+          </AssociationSet>
+          <AssociationSet Name="FilmNotes" Association="MovieModel.FilmNotes">
+            <End Role="Film" EntitySet="FilmSet" />
+            <End Role="Notes" EntitySet="NotesSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserFilm" Association="MovieModel.UserFilm">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Film" EntitySet="FilmSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserRemark" Association="MovieModel.UserRemark">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Remark" EntitySet="RemarkSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Notes" Relationship="MovieModel.UserNotes" FromRole="User" ToRole="Notes" />
+          <NavigationProperty Name="Film" Relationship="MovieModel.UserFilm" FromRole="User" ToRole="Film" />
+          <NavigationProperty Name="Remark" Relationship="MovieModel.UserRemark" FromRole="User" ToRole="Remark" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="MovieModel.UserNotes" FromRole="Notes" ToRole="User" />
+          <NavigationProperty Name="Film" Relationship="MovieModel.FilmNotes" FromRole="Notes" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Resume" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IMG" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Genre" Relationship="MovieModel.FilmGenre" FromRole="Film" ToRole="Genre" />
+          <NavigationProperty Name="Remark" Relationship="MovieModel.RemarkFilm" FromRole="Film" ToRole="Remark" />
+          <NavigationProperty Name="Notes" Relationship="MovieModel.FilmNotes" FromRole="Film" ToRole="Notes" />
+          <NavigationProperty Name="User" Relationship="MovieModel.UserFilm" FromRole="Film" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Film" Relationship="MovieModel.FilmGenre" FromRole="Genre" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Remark">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Film" Relationship="MovieModel.RemarkFilm" FromRole="Remark" ToRole="Film" />
+          <NavigationProperty Name="User" Relationship="MovieModel.UserRemark" FromRole="Remark" ToRole="User" />
+        </EntityType>
+        <Association Name="UserNotes">
+          <End Type="MovieModel.User" Role="User" Multiplicity="1" />
+          <End Type="MovieModel.Notes" Role="Notes" Multiplicity="*" />
+        </Association>
+        <Association Name="FilmGenre">
+          <End Type="MovieModel.Film" Role="Film" Multiplicity="*" />
+          <End Type="MovieModel.Genre" Role="Genre" Multiplicity="1" />
+        </Association>
+        <Association Name="RemarkFilm">
+          <End Type="MovieModel.Remark" Role="Remark" Multiplicity="*" />
+          <End Type="MovieModel.Film" Role="Film" Multiplicity="1" />
+        </Association>
+        <Association Name="FilmNotes">
+          <End Type="MovieModel.Film" Role="Film" Multiplicity="1" />
+          <End Type="MovieModel.Notes" Role="Notes" Multiplicity="*" />
+        </Association>
+        <Association Name="UserFilm">
+          <End Type="MovieModel.User" Role="User" Multiplicity="1" />
+          <End Type="MovieModel.Film" Role="Film" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRemark">
+          <End Type="MovieModel.User" Role="User" Multiplicity="1" />
+          <End Type="MovieModel.Remark" Role="Remark" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MovieModelStoreContainer" CdmEntityContainer="MovieModelContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieModel.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieModel.Notes)">
+        <MappingFragment StoreEntitySet="NotesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieModel.Film)">
+        <MappingFragment StoreEntitySet="FilmSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Resume" ColumnName="Resume" />
+          <ScalarProperty Name="IMG" ColumnName="IMG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieModel.Genre)">
+        <MappingFragment StoreEntitySet="GenreSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RemarkSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MovieModel.Remark)">
+        <MappingFragment StoreEntitySet="RemarkSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserNotes" TypeName="MovieModel.UserNotes" StoreEntitySet="NotesSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Notes">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FilmGenre" TypeName="MovieModel.FilmGenre" StoreEntitySet="FilmSet">
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="Id" ColumnName="Genre_Id" />
+      </EndProperty>
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RemarkFilm" TypeName="MovieModel.RemarkFilm" StoreEntitySet="RemarkSet">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Film_Id" />
+      </EndProperty>
+      <EndProperty Name="Remark">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FilmNotes" TypeName="MovieModel.FilmNotes" StoreEntitySet="NotesSet">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Film_Id" />
+      </EndProperty>
+      <EndProperty Name="Notes">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserFilm" TypeName="MovieModel.UserFilm" StoreEntitySet="FilmSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRemark" TypeName="MovieModel.UserRemark" StoreEntitySet="RemarkSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Remark">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
