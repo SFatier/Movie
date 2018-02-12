@@ -47,7 +47,7 @@ namespace IHM.Model
             {
                 if (image != value)
                 {
-                    id = value;
+                    image = value;
                     RaisePropertyChanged("Image");
                     RaisePropertyChanged("InfosFilm");
                 }

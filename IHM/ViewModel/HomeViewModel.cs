@@ -37,7 +37,7 @@ namespace IHM.ViewModel
             var lstFilm = DAO.ReferentielManager.DBConnect.Instance.GetAllFilm();
             foreach (var item in lstFilm)
             {
-                films.Add(new Model.Film { Id = item.Id, Titre = item.Title, Resume = item.Resume, Image = "C:\\Users\\sigt_sf\\Documents\\GitHub\\Movie\\IHM\\IMG\\" + item.IMG });
+                films.Add(new Model.Film { Id = item.Id, Titre = item.Title, Resume = item.Resume, Image = item.IMG });
             }
 
             /*films.Add(new Model.Film { Id=1, Titre="Ca", Resume="toto"});

@@ -137,13 +137,5 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="IMG\_ca.jpg" />
-    <Resource Include="IMG\_django.jpg" />
-    <Resource Include="IMG\_happyBirthdead.jpg" />
-    <Resource Include="IMG\_hitman.jpg" />
-    <Resource Include="IMG\_leparrain.jpg" />
-    <Resource Include="IMG\_lion.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
