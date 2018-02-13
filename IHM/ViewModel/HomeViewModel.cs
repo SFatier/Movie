@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -47,7 +48,7 @@ namespace IHM.ViewModel
             films.Add(new Model.Film { Id = 5, Titre = "RastaRocket", Resume = "totozerzer" });
             films.Add(new Model.Film { Id = 6, Titre = "Le prof", Resume = "ldjozarj" });*/
 
-            Films = films;
+           Films = films;
         }
         #endregion
     }

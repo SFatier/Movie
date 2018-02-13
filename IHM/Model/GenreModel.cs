@@ -9,46 +9,53 @@ namespace IHM.Model
 {
         public class GenreModel { }
 
-        public class Genre : INotifyPropertyChanged
+    public class Genre : Base
+    {
+        private int id { get; set; }
+        private string nom;
+
+        public int Id
         {
-            private int Id { get; set; }
-            private string nom;
-        
-             public string Nom
-              {
-                get
-                {
-                    return nom;
-                }
-
-                set
-                {
-                    if (nom != value)
-                    {
-                    nom = value;
-                        RaisePropertyChanged("Nom");
-                        RaisePropertyChanged("InfosGenre");
-                    }
-                }
-            }
-              
-            public string InfosGenre
+            get
             {
-                get
-                {
-                    return "Nom :  " +   nom + ". Id : " + Id;
-                }
+                return id;
             }
 
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void RaisePropertyChanged(string property)
+            set
             {
-                if (PropertyChanged != null)
+                if (id != value)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs(property));
+                    id = value;
+                    RaisePropertyChanged("id");
+                    RaisePropertyChanged("InfosGenre");
                 }
             }
         }
-   
+
+        public string Nom
+        {
+            get
+            {
+                return nom;
+            }
+
+            set
+            {
+                if (nom != value)
+                {
+                    nom = value;
+                    RaisePropertyChanged("Nom");
+                    RaisePropertyChanged("InfosGenre");
+                }
+            }
+        }
+
+        public string InfosGenre
+        {
+            get
+            {
+                return "Nom :  " + nom + ". Id : " + id;
+            }
+        }
+    }
 }

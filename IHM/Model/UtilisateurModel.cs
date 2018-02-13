@@ -9,7 +9,7 @@ namespace IHM.Model
 {
         public class UtilisateurModel { }
 
-        public class Utilisateur : INotifyPropertyChanged
+        public class Utilisateur : Base
         {
             private int Id { get; set; }
             private string email;
@@ -37,16 +37,6 @@ namespace IHM.Model
                 get
                 {
                     return "email :  " +   email + ". Id : " + Id;
-                }
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void RaisePropertyChanged(string property)
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(property));
                 }
             }
         }

@@ -62,7 +62,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper Classes\ObservableObject.cs" />
-    <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="Helper Classes\RelayCommand.cs" />
+    <Compile Include="Model\Base.cs" />
     <Compile Include="Model\CommentaireModel.cs" />
     <Compile Include="Model\FilmModel.cs" />
     <Compile Include="Model\GenreModel.cs" />
@@ -136,6 +137,13 @@
       <Name>DataBase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\_ca.jpg" />
+    <Resource Include="Images\_django.jpg" />
+    <Resource Include="Images\_happyBirthdead.jpg" />
+    <Resource Include="Images\_hitman.jpg" />
+    <Resource Include="Images\_leparrain.jpg" />
+    <Resource Include="Images\_lion.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@ namespace IHM.Model
 {
     public class CommentaireModel { }
 
-    public class Commentaire : INotifyPropertyChanged
+    public class Commentaire : Base
     {
         private int Id { get; set; }
         private string filmFK;
@@ -55,16 +55,5 @@ namespace IHM.Model
                 return  "id" + Id + "filmFK :  " + filmFK + ". utilisateurFK : " + utilisateurFK;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
     }
-
 }

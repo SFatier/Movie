@@ -10,7 +10,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <Image Source="{Binding Images}" Stretch="None"/>
+                        <Image Source="{Binding Image}"   Width="220"  Height="326"/>
                         <Label Content="{Binding Titre}"/>
                     </StackPanel>
                 </DataTemplate>

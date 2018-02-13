@@ -9,7 +9,7 @@ namespace IHM.Model
 {
     public class FilmModel { }
 
-    public class Film : INotifyPropertyChanged
+    public class Film : Base
     {
         private int id;
         private string image;
@@ -125,14 +125,6 @@ namespace IHM.Model
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
+       
     }
 }

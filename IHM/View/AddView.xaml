@@ -6,7 +6,46 @@
              xmlns:local="clr-namespace:IHM"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Label Content="toto"></Label>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        
+        <!--Titre-->
+        <Label>Titre:</Label>
+        <TextBox Grid.Column="1" Margin="0,0,20,10" Grid.ColumnSpan="2" Text="{Binding TitleFilm, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <!--Genre-->
+        <ComboBox Grid.Row="1" Grid.Column="1" Name="cmbGenre" ItemsSource="{Binding Genres, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Margin="0,0,20,10" SelectedValue="{Binding NomGenre}" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Nom}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <!--Selection d'une image-->
+        <Button Grid.Row="2" Content="Fichier" Margin="0,0,10,10" Command="{Binding CommandeOpenIMG}"></Button>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,20,10" Grid.ColumnSpan="2" Text="{Binding IMGFilm, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <!--description-->
+        <Label Grid.Row="3">Resume:</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" AcceptsReturn="True" Margin="0,0,20,31" Grid.ColumnSpan="2" Text="{Binding ResumeFilm, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <!--Enregistrement-->
+        <Button Grid.Row="4" Grid.Column="2" Content="Enregistrer" Margin="0,0,10,10"  Command="{Binding CommandeNewFilm}"></Button>
+
     </Grid>
 </UserControl>

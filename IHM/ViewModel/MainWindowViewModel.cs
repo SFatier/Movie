@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IHM.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,6 @@ namespace IHM.ViewModel
         #region Fields
 
         private ICommand _changePageCommand;
-
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
@@ -18,11 +18,9 @@ namespace IHM.ViewModel
 
         public MainWindowViewModel()
         {
-            // Add available pages
             PageViewModels.Add(new HomeViewModel());
             PageViewModels.Add(new AddViewModel());
-
-            // Set starting page
+           
             CurrentPageViewModel = PageViewModels[0];
         }
 
@@ -82,6 +80,9 @@ namespace IHM.ViewModel
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm == viewModel);
         }
+
+     
+
 
         #endregion
     }
